@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast</title>
+</head>
+<body>
+    <h1>Enter City and Country code to Get Weather Forecast</h1>
+    <form action="/weatherInfo" method="POST">
+        <label for="city">City name: </label>
+        <input type="text" id="city" name="city" required>
+        <label for="countryCode">Country Code (refer to ISO 3166):</label>
+        <input type="text" id="country" name="country" required>
+        <button type="submit">Get Weather Info</button>
+  </form>
+  <% if (locals.content) {%>
+    <%
+        // Converting temp in Kelvin to Celsius with 2 decimal points. 
+        const temp = (content.main.temp - 273.15).toFixed(2);
+        const tempMinCelsius = (content.main.temp_min - 273.15).toFixed(2);
+        const tempMaxCelsius = (content.main.temp_max - 273.15).toFixed(2);
+    %>
+    <h2>Current Weather Forecast: </h2>
+    <p>City: <%= content.name%></p>
+    <p>Country: <%= content.sys.country%> </p>
+    <p>Temperature: <%= temp %> °C</p>
+    <p>Minimum Temperature: <%= tempMinCelsius %> °C</p>
+    <p>Maximum Temperature: <%= tempMaxCelsius %> °C</p>
+    <p>Weather: </p>
+    <p><%= content.weather[0].main %></p>
+    <p><%= content.weather[0].description %></p>
+
+  <% } %>
+
+  <!-- Show any errors that were sent from the backend -->
+  <% if (locals.error) { %>
+    <div id="tag-error" class="tag-error">
+      <%= error %>
+    </div>
+  <% } %>
+
+    
+</body>
+</html>
