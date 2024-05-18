@@ -13,6 +13,8 @@ let country = '';
 
 // Mounting middleware in our app using use method.
 app.use(bodyParser.urlencoded({ extended: true }));
+// Adding static files reference using middleware.
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
     res.render("index.ejs");

@@ -4,42 +4,55 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Forecast</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/styles/main.css">
+
 </head>
 <body>
-    <h1>Enter City and Country code to Get Weather Forecast</h1>
-    <form action="/weatherInfo" method="POST">
-        <label for="city">City name: </label>
-        <input type="text" id="city" name="city" required>
-        <label for="countryCode">Country Code (refer to ISO 3166):</label>
-        <input type="text" id="country" name="country" required>
-        <button type="submit">Get Weather Info</button>
-  </form>
-  <% if (locals.content) {%>
-    <%
-        // Converting temp in Kelvin to Celsius with 2 decimal points. 
-        const temp = (content.main.temp - 273.15).toFixed(2);
-        const tempMinCelsius = (content.main.temp_min - 273.15).toFixed(2);
-        const tempMaxCelsius = (content.main.temp_max - 273.15).toFixed(2);
-    %>
-    <h2>Current Weather Forecast: </h2>
-    <p>City: <%= content.name%></p>
-    <p>Country: <%= content.sys.country%> </p>
-    <p>Temperature: <%= temp %> °C</p>
-    <p>Minimum Temperature: <%= tempMinCelsius %> °C</p>
-    <p>Maximum Temperature: <%= tempMaxCelsius %> °C</p>
-    <p>Weather: </p>
-    <p><%= content.weather[0].main %></p>
-    <p><%= content.weather[0].description %></p>
-
-  <% } %>
-
-  <!-- Show any errors that were sent from the backend -->
-  <% if (locals.error) { %>
-    <div id="tag-error" class="tag-error">
-      <%= error %>
+  <div class="flex-container">
+    <div class="card text-bg-dark mb-3">
+      <div class="card-body">
+        <h3 class="card-title">Enter City and Country code to Get Weather Forecast</h3>
+        <form action="/weatherInfo" method="POST">
+          <label for="city">City name: </label>
+          <input type="text" id="city" name="city" required>
+          <label for="countryCode">Country Code (refer to ISO 3166):</label>
+          <input type="text" id="country" name="country" required>
+          <button type="submit">Get Weather Info</button>
+      </form>
+    
+      <% if (locals.content) {%>
+        <%
+            // Converting temp in Kelvin to Celsius with 2 decimal points. 
+            const temp = (content.main.temp - 273.15).toFixed(2);
+            const tempMinCelsius = (content.main.temp_min - 273.15).toFixed(2);
+            const tempMaxCelsius = (content.main.temp_max - 273.15).toFixed(2);
+        %>
+        <div class="info">
+          <h4>Current Weather Forecast: </h4>
+          <p>City: <%= content.name%></p>
+          <p>Country: <%= content.sys.country%> </p>
+          <p>Temperature: <%= temp %> °C</p>
+          <p>Minimum Temperature: <%= tempMinCelsius %> °C</p>
+          <p>Maximum Temperature: <%= tempMaxCelsius %> °C</p>
+          <p>Weather: </p>
+          <p><%= content.weather[0].main %></p>
+          <p><%= content.weather[0].description %></p>
+        </div>
+    
+      <% } %>
+    
+      <!-- Show any errors that were sent from the backend -->
+      <% if (locals.error) { %>
+        <div id="tag-error" class="tag-error">
+          <%= error %>
+        </div>
+      <% } %>
+      </div>
     </div>
-  <% } %>
-
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
 </body>
 </html>
