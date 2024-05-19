@@ -22,4 +22,4 @@ https://anamolkhadka.github.io/simon_game/
 Open Weather
   
 ## Screenshots:
-<img src="./Screenshot.png" width="1200" height="600">
+<img src="./screenshot.png" width="1200" height="600">
