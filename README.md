@@ -3,7 +3,7 @@
 This is a Weather forecast app that provides current weather information provided city and country code.
 
 ## Link to the app 👇:
-https://anamolkhadka.github.io/simon_game/
+https://weatherapp-09aq.onrender.com/
 
 ## Technologies used:
 
